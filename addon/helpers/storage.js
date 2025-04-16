@@ -1,9 +1,15 @@
 import { assert } from '@ember/debug';
 import EmberObject, { computed, get } from '@ember/object';
 import { getOwner } from '@ember/application';
-import { dasherize } from '@ember/string';
 
 const storage = {};
+
+function dasherize(str) {
+  return str
+    .replace(/([a-z\d])([A-Z])/g, '$1-$2') // Add a dash between lowercase and uppercase letters
+    .replace(/[_\s]+/g, '-') // Replace underscores or spaces with dashes
+    .toLowerCase(); // Convert the string to lowercase
+}
 
 function tryStorage(name) {
   let nativeStorage;
